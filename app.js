@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
+const helmet = require('helmet');
 const auth = require('./middlewares/auth');
 const { login, createUser } = require('./controllers/users');
 const { celebrateSignUp, celebrateSignIn } = require('./middlewares/validation');
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // для приёма ве�
 mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
 
 app.use(requestLogger); // подключаем логгер запросов
+app.use(helmet());
 
 app.post('/signup', celebrateSignUp, createUser);
 app.post('/signin', celebrateSignIn, login);
