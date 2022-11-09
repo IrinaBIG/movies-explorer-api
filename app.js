@@ -4,9 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
-const auth = require('./middlewares/auth');
-const { login, createUser } = require('./controllers/users');
-const { celebrateSignUp, celebrateSignIn } = require('./middlewares/validation');
+const router = require('./routes/index');
 const handlerErrors = require('./middlewares/handlerErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('./middlewares/cors');
@@ -23,13 +21,7 @@ mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
 app.use(requestLogger); // подключаем логгер запросов
 app.use(helmet());
 
-app.post('/signup', celebrateSignUp, createUser);
-app.post('/signin', celebrateSignIn, login);
-
-app.use(auth);
-app.use('/users', require('./routes/users'));
-app.use('/movies', require('./routes/movies'));
-app.use('*', require('./routes/notFound'));
+app.use(router);
 
 app.use(errorLogger); // подключаем логгер ошибок
 // обработчики ошибок
