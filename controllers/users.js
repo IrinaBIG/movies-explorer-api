@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bcrypt = require('bcryptjs'); // импортируем bcrypt
 const jwt = require('jsonwebtoken');
 const BadRequestErr = require('../errors/bad-request-err');
