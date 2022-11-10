@@ -35,7 +35,7 @@ module.exports.celebrateCreateMovie = celebrate({
     trailerLink: Joi.string().required().pattern(regexUrl),
     thumbnail: Joi.string().required().pattern(regexUrl),
     // owner: Joi.string().length(24).hex().required(),
-    movieId: Joi.string().length(24).hex().required(),
+    // movieId: Joi.string().length(24).hex().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
   }),

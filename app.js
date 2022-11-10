@@ -4,15 +4,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
-const router = require('./routes/index');
+const limiter = require('./rateLimiter');
+const router = require('./routes');
 const handlerErrors = require('./middlewares/handlerErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // за 15 минут
-  max: 100, // можно совершить максимум 100 запросов с одного IP
-});
 
 const cors = require('./middlewares/cors');
 
@@ -23,7 +18,7 @@ app.use(cors);
 app.use(bodyParser.json()); // для собирания JSON-формата
 app.use(bodyParser.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
+mongoose.connect('mongodb://localhost:27017/moviesdb');
 
 app.use(requestLogger); // подключаем логгер запросов
 app.use(helmet());
@@ -37,5 +32,5 @@ app.use(errors()); // обработчик ошибок celebrate
 app.use(handlerErrors); // централизованнный обработчик
 
 app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
+  // console.log(`App listening on port ${PORT}`);
 });

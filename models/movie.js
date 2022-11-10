@@ -21,8 +21,6 @@ const movieSchema = new mongoose.Schema({
   year: {
     type: String,
     required: true,
-    minlength: [4, 'Год не может быть меньше 4 символов'],
-    maxlength: [4, 'Год не может быть больше 4 символов'],
   },
 
   description: {
