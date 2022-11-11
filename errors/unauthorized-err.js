@@ -1,8 +1,10 @@
+const { UNAUTHORIZED } = require('../utils/constants');
+
 class UnauthorizedErr extends Error {
   constructor(message) {
     super(message);
     this.name = 'unauthorizedErr';
-    this.statusCode = 401;
+    this.statusCode = UNAUTHORIZED;
   }
 }
 

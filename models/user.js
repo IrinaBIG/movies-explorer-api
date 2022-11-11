@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs'); // импортируем bcrypt
 const mongoose = require('mongoose');
 // const { default: isURL } = require('validator/lib/isURL');
 const { isEmail } = require('validator');
+const { badRequestErrorText } = require('../utils/constants');
 
 const validateEmail = (email) => isEmail(email);
 
@@ -36,13 +37,13 @@ userSchema.statics.findUserByCredentials = function (email, password) {
   return this.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        return Promise.reject(new Error('Неправильные почта или пароль12'));
+        return Promise.reject(new Error(badRequestErrorText));
       }
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
             // хеши не совпали — отклоняем промис
-            return Promise.reject(new Error('Неправильные почта или пароль13'));
+            return Promise.reject(new Error(badRequestErrorText));
           }
           return user; // теперь user доступен
         });

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
-const limiter = require('./rateLimiter');
+const limiter = require('./utils/rateLimiter');
 const router = require('./routes');
 const handlerErrors = require('./middlewares/handlerErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -31,6 +31,7 @@ app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors()); // обработчик ошибок celebrate
 app.use(handlerErrors); // централизованнный обработчик
 
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-});
+app.listen(PORT);
+// app.listen(PORT, () => {
+//   console.log(`App listening on port ${PORT}`); // закомментить перед отправкой!
+// });
