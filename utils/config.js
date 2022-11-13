@@ -6,6 +6,6 @@ const limiter = rateLimit({
 });
 
 // rateLimit(limiter);
-const devDataBaseURL = 'mongodb://localhost:27017/bitfilmsdb';
+const devDataBaseURL = 'mongodb://localhost:27017/moviesdb';
 
 module.exports = { limiter, devDataBaseURL };

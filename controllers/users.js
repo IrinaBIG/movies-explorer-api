@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const BadRequestErr = require('../errors/bad-request-err');
 const NotFoundErr = require('../errors/not-found-err');
 const ConflictErr = require('../errors/conflict-err');
+// const UnauthorizedErr = require('../errors/unauthorized-err');
 const User = require('../models/user');
 const { userIdNotFoundErrorText, badRequestErrorText, conflictErrorText } = require('../utils/constants');
 

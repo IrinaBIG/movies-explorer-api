@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { default: isURL } = require('validator/lib/isURL');
+const { fieldIsRequiredErrorText, badRequestErrorText } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
 
@@ -30,20 +31,20 @@ const movieSchema = new mongoose.Schema({
 
   image: {
     type: String,
-    required: [true, 'Поле обязательно к заполнению'],
+    required: [true, fieldIsRequiredErrorText],
     validate: {
       validator: isURL,
     },
-    message: 'Поле должно содержать URL',
+    message: badRequestErrorText,
   },
 
   trailerLink: {
     type: String,
-    required: [true, 'Поле обязательно к заполнению'],
+    required: [true, fieldIsRequiredErrorText],
     validate: {
       validator: isURL,
     },
-    message: 'Поле должно содержать URL',
+    message: badRequestErrorText,
   },
 
   thumbnail: {
@@ -52,7 +53,7 @@ const movieSchema = new mongoose.Schema({
     validate: {
       validator: isURL,
     },
-    message: 'Поле должно содержать URL',
+    message: badRequestErrorText,
   },
 
   owner: {
@@ -78,5 +79,4 @@ const movieSchema = new mongoose.Schema({
 
 });
 
-// создаём модель и экспортируем её
 module.exports = mongoose.model('movie', movieSchema);

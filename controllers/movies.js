@@ -7,8 +7,9 @@ const {
 } = require('../utils/constants');
 
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({})
-    .then((cards) => res.send({ data: cards }))
+  const owner = req.user._id;
+  Movie.find({ owner })
+    .then((movies) => res.send({ data: movies }))
     .catch(() => next());
 };
 

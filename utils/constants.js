@@ -12,6 +12,11 @@ const unauthorizedPayloadErrorText = 'Необходима авторизаци�
 const forbiddenErrorText = 'Вы не можете удалить фильм другого пользователя.';
 const movieIdNotFoundErrorText = 'Фильм с указанным ID не найден';
 const messageDeleteMovie = 'Фильм удален';
+const internalServerErrorText = 'На сервере произошла ошибка';
+const fieldIsRequiredErrorText = 'Поле обязательно к заполнению';
+const routeNotFounderErrorText = 'Ресурс не найден';
+const fieldNameLengtsErrorText = 'Имя не может быть меньше 2 символов и больше 30 символов';
+const loginErrText = 'Неправильные имя или пароль';
 
 module.exports = {
   ERROR_CODE,
@@ -28,4 +33,9 @@ module.exports = {
   forbiddenErrorText,
   movieIdNotFoundErrorText,
   messageDeleteMovie,
+  internalServerErrorText,
+  fieldIsRequiredErrorText,
+  routeNotFounderErrorText,
+  fieldNameLengtsErrorText,
+  loginErrText,
 };

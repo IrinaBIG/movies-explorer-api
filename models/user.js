@@ -1,28 +1,30 @@
-const bcrypt = require('bcryptjs'); // импортируем bcrypt
+const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
-// const { default: isURL } = require('validator/lib/isURL');
 const { isEmail } = require('validator');
-const { badRequestErrorText } = require('../utils/constants');
+const {
+  badRequestErrorText, conflictErrorText, fieldIsRequiredErrorText,
+  fieldNameLengtsErrorText, loginErrText,
+} = require('../utils/constants');
+const UnauthorizedErr = require('../errors/unauthorized-err');
 
 const validateEmail = (email) => isEmail(email);
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    minlength: [2, 'Имя не может быть меньше 2 символов'],
-    maxlength: [30, 'Имя не может быть больше 30 символов'],
-    required: [true, 'Поле обязательно к заполнению'],
-    // default: 'Жак-Ив Кусто',
+    minlength: [2, fieldNameLengtsErrorText],
+    maxlength: [30, fieldNameLengtsErrorText],
+    required: [true, fieldIsRequiredErrorText],
   },
 
   email: {
     type: String,
-    unique: [true, 'Пользователь с таким email уже существет'],
-    required: [true, 'Поле обязательно к заполнению'],
+    unique: [true, conflictErrorText],
+    required: [true, fieldIsRequiredErrorText],
     validate: {
       validator: validateEmail,
     },
-    message: 'Поле должно содержать email',
+    message: badRequestErrorText,
   },
 
   password: {
@@ -33,22 +35,20 @@ const userSchema = new mongoose.Schema({
 
 });
 
-userSchema.statics.findUserByCredentials = function (email, password) {
+userSchema.statics.findUserByCredentials = function findUserByEmailPassword(email, password) {
   return this.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        return Promise.reject(new Error(badRequestErrorText));
+        return Promise.reject(new UnauthorizedErr(loginErrText));
       }
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            // хеши не совпали — отклоняем промис
-            return Promise.reject(new Error(badRequestErrorText));
+            return Promise.reject(new UnauthorizedErr(loginErrText));
           }
-          return user; // теперь user доступен
+          return user;
         });
     });
 };
 
-// создаём модель и экспортируем её
 module.exports = mongoose.model('user', userSchema);
