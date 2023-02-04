@@ -2,7 +2,9 @@
 const allowedCors = [
   'http://api.diplomabig.students.nomoredomains.icu',
   'https://api.diplomabig.students.nomoredomains.icu',
-  // 'http://localhost:7777',
+  'http://irinabigdiploma.nomoredomainsclub.ru/',
+  'https://irinabigdiploma.nomoredomainsclub.ru/',
+  'http://localhost:7777',
   'http://localhost:3000',
   'http://127.0.0.1',
 ];
