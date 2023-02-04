@@ -10,13 +10,23 @@ const router = require('./routes');
 const handlerErrors = require('./middlewares/handlerErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
+const allowedCors = [
+  'https://api.diplomabig.students.nomoredomains.icu',
+  'https://irinabigdiploma.nomoredomainsclub.ru/',
+  'http://api.diplomabig.students.nomoredomains.icu',
+  'http://irinabigdiploma.nomoredomainsclub.ru/',
+  'http://localhost:7777',
+  'http://localhost:3000',
+  'http://127.0.0.1',
+];
+
 // const cors = require('./middlewares/cors');
 
 const { NODE_ENV, DB_URL, PORT = 3000 } = process.env;
 
 const app = express();
 // app.use(cors);
-app.use(cors());
+app.use(cors({ origin: allowedCors }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
