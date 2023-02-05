@@ -22,7 +22,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const cors = require('./middlewares/cors');
 
-const { NODE_ENV, DB_URL, PORT = 3000 } = process.env;
+const { NODE_ENV, DB_URL, PORT = 5555 } = process.env;
 
 const app = express();
 app.use(cors);
