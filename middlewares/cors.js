@@ -1,9 +1,9 @@
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
   'https://api.diplomabig.students.nomoredomains.icu',
-  'https://irinabigdiploma.nomoredomainsclub.ru/',
+  'https://irinabigdiploma.nomoredomainsclub.ru',
   'http://api.diplomabig.students.nomoredomains.icu',
-  'http://irinabigdiploma.nomoredomainsclub.ru/',
+  'http://irinabigdiploma.nomoredomainsclub.ru',
   'http://localhost:7777',
   'http://localhost:3000',
   'http://127.0.0.1',
